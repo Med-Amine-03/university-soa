@@ -1,0 +1,52 @@
+package com.soa.geteway.config;
+
+import com.soa.geteway.security.JwtAuthenticationFilter;
+import lombok.RequiredArgsConstructor;
+import org.springframework.cloud.gateway.route.RouteLocator;
+import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+@RequiredArgsConstructor
+public class GatewayRoutesConfig {
+
+    private final JwtAuthenticationFilter jwtFilter;
+
+    @Bean
+    public RouteLocator gatewayRoutes(RouteLocatorBuilder builder) {
+        return builder.routes()
+
+                // AUTH SERVICE
+                .route("auth-service", r -> r
+                        .path("/auth/**")
+                        .filters(f -> f.filter(jwtFilter.apply(new Object())))
+                        .uri("http://auth-service:8081"))
+
+                // STUDENT SERVICE
+                .route("student-service", r -> r
+                        .path("/students/**")
+                        .filters(f -> f.filter(jwtFilter.apply(new Object())))
+                        .uri("http://student-service:8082"))
+
+                // COURSE SERVICE
+                .route("course-service", r -> r
+                        .path("/courses/**")
+                        .filters(f -> f.filter(jwtFilter.apply(new Object())))
+                        .uri("http://course-service:8083"))
+
+                // GRADE SERVICE
+                .route("grade-service", r -> r
+                        .path("/grades/**")
+                        .filters(f -> f.filter(jwtFilter.apply(new Object())))
+                        .uri("http://grade-service:8084"))
+
+                // BILLING SERVICE
+                .route("billing-service", r -> r
+                        .path("/billing/**")
+                        .filters(f -> f.filter(jwtFilter.apply(new Object())))
+                        .uri("http://billing-service:8085"))
+
+                .build();
+    }
+}
