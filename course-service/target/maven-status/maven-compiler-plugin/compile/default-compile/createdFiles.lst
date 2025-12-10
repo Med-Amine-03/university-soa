@@ -1,0 +1,7 @@
+com\soa\course\endpoints\CourseSOAPServer.class
+com\soa\course\service\CourseService.class
+com\soa\course\util\ResponseMessage.class
+com\soa\course\dao\CourseDAO.class
+com\soa\course\dao\DBConnection.class
+com\soa\course\model\Course.class
+com\soa\course\endpoints\CourseEndpoint.class
