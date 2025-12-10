@@ -27,7 +27,7 @@ public class GatewayRoutesConfig {
                 .route("student-service", r -> r
                         .path("/students/**")
                         .filters(f -> f.filter(jwtFilter.apply(new Object())))
-                        .uri("http://student-service:8082"))
+                        .uri("http://student-service:4000"))
 
                 // COURSE SERVICE
                 .route("course-service", r -> r

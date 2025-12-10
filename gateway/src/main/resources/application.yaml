@@ -7,8 +7,6 @@ spring:
 
   cloud:
     gateway:
-      default-filters:
-        - JwtAuthenticationFilter
 
       routes:
         - id: auth-service
@@ -17,7 +15,7 @@ spring:
             - Path=/auth/**
 
         - id: student-service
-          uri: http://student-service:8082
+          uri: http://student-service:4000
           predicates:
             - Path=/students/**
 
