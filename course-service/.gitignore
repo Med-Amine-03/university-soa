@@ -1,0 +1,39 @@
+# Compiled class files
+*.class
+*.jar
+*.war
+*.ear
+
+# Build directories
+bin/
+build/
+out/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
+# Eclipse/IntelliJ IDEA/NetBeans project files
+*.classpath
+*.project
+*.settings/
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Maven / Gradle files (if you add them later)
+target/
+*.gradle
+build/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env

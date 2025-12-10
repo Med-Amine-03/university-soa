@@ -1,1 +1,1 @@
-"# Course service" 
+"# University SOA Project" 
