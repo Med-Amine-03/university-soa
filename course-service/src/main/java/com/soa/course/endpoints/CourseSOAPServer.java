@@ -14,7 +14,7 @@ public class CourseSOAPServer {
             if (in != null) props.load(in);
         } catch (IOException ignored) {}
 
-        String port = props.getProperty("server.port", "8080");
+        String port = props.getProperty("server.port", "8083");
         String context = props.getProperty("server.context", "/courseService");
         String address = "http://0.0.0.0:" + port + context;
 

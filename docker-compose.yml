@@ -57,6 +57,66 @@ services:
       MONGO_URI: mongodb://mongo:27017/studentsdb
     restart: always
 
+  course-service:
+    build: ./course-service
+    container_name: course-service
+    ports:
+      - "8083:8083"
+    volumes:
+      - ./course-service/data:/app/data
+    restart: always
+
+  billing-service:
+    build:
+      context: ./billing-service
+      dockerfile: Dockerfile
+    container_name: billing-service
+    ports:
+      - "8085:5000"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:5000
+    restart: unless-stopped
+
+  # ----------------------------
+  # NEW: PostgreSQL for grade-service
+  # ----------------------------
+  grades-postgres:
+    image: postgres:15
+    container_name: grades_postgres
+    environment:
+      POSTGRES_USER: grades_user
+      POSTGRES_PASSWORD: grades_pass
+      POSTGRES_DB: grades_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - grades_pgdata:/var/lib/postgresql/data
+    restart: always
+
+
+  # ----------------------------
+  # NEW: Grade service (FastAPI)
+  # ----------------------------
+  grade-service:
+    build: ./grade-service
+    container_name: grade-service
+    depends_on:
+      - grades-postgres
+    environment:
+      postgres_user: grades_user
+      postgres_password: grades_pass
+      postgres_db: grades_db
+      postgres_host: grades-postgres
+      postgres_port: 5432
+      jwt_secret: change-me-for-prod
+      jwt_algorithm: HS256
+    ports:
+      - "8084:8084"   # ← runs on 8084 NOT 8000
+    restart: always
+
+
+  # API Gateway (Spring Cloud)
   gateway:
     build: ./gateway
     container_name: gateway
@@ -65,11 +125,17 @@ services:
     depends_on:
       - auth-service
       - student-service
+      - billing-service
+      - grade-service
     environment:
       AUTH_SERVICE_URL: http://auth-service:8081
-      STUDENT_SERVICE_URL: http://student_service:4000
+      STUDENT_SERVICE_URL: http://student-service:4000
+      COURSE_SERVICE_URL: http://course-service:8083
+      BILLING_SERVICE_URL: http://billing-service:80
+      GRADES_SERVICE_URL: http://grade-service:8084
     restart: always
 
 volumes:
   mysql_auth_data:
   mongo_data:
+  grades_pgdata:

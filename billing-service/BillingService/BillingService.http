@@ -1,0 +1,148 @@
+@BillingService_HostAddress = http://localhost:8085
+
+### Test CalculateBill - Calculate bill for student 2 with amount 5000
+POST {{BillingService_HostAddress}}/BillingService.svc HTTP/1.1
+Content-Type: text/xml; charset=utf-8
+SOAPAction: "http://billing.example.com/IBillingService/CalculateBill"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tns="http://billing.example.com/">
+    <soap:Body>
+        <tns:CalculateBill>
+            <studentId>2</studentId>
+            <amount>5000</amount>
+        </tns:CalculateBill>
+    </soap:Body>
+</soap:Envelope>
+
+###
+
+### Test CalculateBill - Calculate bill for student 3 with amount 5000
+POST {{BillingService_HostAddress}}/BillingService.svc HTTP/1.1
+Content-Type: text/xml; charset=utf-8
+SOAPAction: "http://billing.example.com/IBillingService/CalculateBill"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tns="http://billing.example.com/">
+    <soap:Body>
+        <tns:CalculateBill>
+            <studentId>3</studentId>
+            <amount>8085</amount>
+        </tns:CalculateBill>
+    </soap:Body>
+</soap:Envelope>
+
+###
+
+### Test GetInvoice - Get invoice for student 2
+POST {{BillingService_HostAddress}}/BillingService.svc HTTP/1.1
+Content-Type: text/xml; charset=utf-8
+SOAPAction: "http://billing.example.com/IBillingService/GetInvoice"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tns="http://billing.example.com/">
+    <soap:Body>
+        <tns:GetInvoice>
+            <studentId>2</studentId>
+        </tns:GetInvoice>
+    </soap:Body>
+</soap:Envelope>
+
+###
+
+### Test GetInvoice - Get invoice for student 5
+POST {{BillingService_HostAddress}}/BillingService.svc HTTP/1.1
+Content-Type: text/xml; charset=utf-8
+SOAPAction: "http://billing.example.com/IBillingService/GetInvoice"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tns="http://billing.example.com/">
+    <soap:Body>
+        <tns:GetInvoice>
+            <studentId>5</studentId>
+        </tns:GetInvoice>
+    </soap:Body>
+</soap:Envelope>
+
+###
+
+### Test GetStudentBalance - Get balance for student 2
+POST {{BillingService_HostAddress}}/BillingService.svc HTTP/1.1
+Content-Type: text/xml; charset=utf-8
+SOAPAction: "http://billing.example.com/IBillingService/GetStudentBalance"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tns="http://billing.example.com/">
+    <soap:Body>
+        <tns:GetStudentBalance>
+            <studentId>2</studentId>
+        </tns:GetStudentBalance>
+    </soap:Body>
+</soap:Envelope>
+
+###
+
+### Test GetStudentBalance - Get balance for student 4
+POST {{BillingService_HostAddress}}/BillingService.svc HTTP/1.1
+Content-Type: text/xml; charset=utf-8
+SOAPAction: "http://billing.example.com/IBillingService/GetStudentBalance"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tns="http://billing.example.com/">
+    <soap:Body>
+        <tns:GetStudentBalance>
+            <studentId>4</studentId>
+        </tns:GetStudentBalance>
+    </soap:Body>
+</soap:Envelope>
+
+###
+
+### Test PayInvoice - Pay 2000 for student 2
+POST {{BillingService_HostAddress}}/BillingService.svc HTTP/1.1
+Content-Type: text/xml; charset=utf-8
+SOAPAction: "http://billing.example.com/IBillingService/PayInvoice"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tns="http://billing.example.com/">
+    <soap:Body>
+        <tns:PayInvoice>
+            <studentId>2</studentId>
+            <amount>2000</amount>
+        </tns:PayInvoice>
+    </soap:Body>
+</soap:Envelope>
+
+###
+
+### Test PayInvoice - Invalid: Pay more than balance
+POST {{BillingService_HostAddress}}/BillingService.svc HTTP/1.1
+Content-Type: text/xml; charset=utf-8
+SOAPAction: "http://billing.example.com/IBillingService/PayInvoice"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tns="http://billing.example.com/">
+    <soap:Body>
+        <tns:PayInvoice>
+            <studentId>2</studentId>
+            <amount>10000</amount>
+        </tns:PayInvoice>
+    </soap:Body>
+</soap:Envelope>
+
+###
+
+### Test PayInvoice - Invalid: Negative amount
+POST {{BillingService_HostAddress}}/BillingService.svc HTTP/1.1
+Content-Type: text/xml; charset=utf-8
+SOAPAction: "http://billing.example.com/IBillingService/PayInvoice"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tns="http://billing.example.com/">
+    <soap:Body>
+        <tns:PayInvoice>
+            <studentId>2</studentId>
+            <amount>-100</amount>
+        </tns:PayInvoice>
+    </soap:Body>
+</soap:Envelope>

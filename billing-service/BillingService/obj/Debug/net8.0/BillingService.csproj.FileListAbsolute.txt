@@ -1,0 +1,7 @@
+C:\Users\issra\OneDrive\Bureau\SOAPROJECT\billing-service\BillingService\obj\Debug\net8.0\BillingService.csproj.AssemblyReference.cache
+C:\Users\issra\OneDrive\Bureau\SOAPROJECT\billing-service\BillingService\obj\Debug\net8.0\BillingService.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\issra\OneDrive\Bureau\SOAPROJECT\billing-service\BillingService\obj\Debug\net8.0\BillingService.AssemblyInfoInputs.cache
+C:\Users\issra\OneDrive\Bureau\SOAPROJECT\billing-service\BillingService\obj\Debug\net8.0\BillingService.AssemblyInfo.cs
+C:\Users\issra\OneDrive\Bureau\SOAPROJECT\billing-service\BillingService\obj\Debug\net8.0\BillingService.csproj.CoreCompileInputs.cache
+C:\Users\issra\OneDrive\Bureau\SOAPROJECT\billing-service\BillingService\obj\Debug\net8.0\BillingService.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\issra\OneDrive\Bureau\SOAPROJECT\billing-service\BillingService\obj\Debug\net8.0\BillingService.MvcApplicationPartsAssemblyInfo.cache
